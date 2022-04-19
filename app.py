@@ -1,10 +1,10 @@
-from flask import Flask, request, jsonify
-app = Flask(__name__)
+from flask import Flask
+from index import idx
+from auth import bp
 
-# A welcome message to test our server
-@app.route('/')
-def index():
-    return "<h1>Welcome to our server !!</h1>"
+app = Flask(__name__)
+app.register_blueprint(idx)
+app.register_blueprint(bp)
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support

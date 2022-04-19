@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+
+<body xmlns="http://www.w3.org/1999/html">
+<p style="position:relative; left:60px; top:2px;">Software Testing Project - Calvin Min (cjm9vr) & Kiyan Zewer
+    (kkz6dh)</p>
+
+{% if g.user %}
+<div style="position:relative; left:60px; top:2px;">
+
+
+    <p>Personal Credits: {{ g.user['credit'] }}</p>
+    <p id="currentBet">Hand Bet: 0 credits</p>
+
+
+    <form action="/bj/reset" method="get">
+        <button type="submit">New Hand</button>
+    </form>
+
+    <table class="no-spacing"; cellspacing="0">
+    <tr>
+    <td>
+    <h3>Dealer's Hand:</h3>
+    <p id="dealerHand">
+    {% if show.show == True %}
+        {% for card in card_data.dealerCards %}
+    <p>
+        {% if card.suit == 'Diamonds' or card.suit == 'Hearts'%}
+        <div style="color:red">{{ card }}
+        </div>
+         {% else %}
+            <div style="color:black">{{ card }}
+        </div>
+            {% endif %}
+    </p>
+    {% endfor %}
+    <p>Dealer Total - {{hand_totals.dTotal}}</p>
+    <p></p>{% else %}
+        <p></p>
+        {% if card_data.dealerCards[0].suit == 'Diamonds' or card_data.dealerCards[0].suit == 'Hearts'%}
+        <div style="color:red">{{ card_data.dealerCards[0] }}
+        </div>
+            <p></p>
+            <div>SECOND CARD HIDDEN</div>
+         <p>{% else %}
+            <div style="color:black">{{ card_data.dealerCards[0] }}
+            <p></p>
+                     <p>
+        </div>
+            <div>SECOND CARD HIDDEN</div>
+            {% endif %}
+        </p>
+        <p></p>
+        <p>Dealer Total - HIDDEN</p>
+    {% endif %}
+    </p>
+    </td>
+    <td>
+    <h3>Player's Hand:</h3>
+    <p id="playerHand">
+        {% for card in card_data.playerCards %}
+    <p>
+        {% if card.suit == 'Diamonds' or card.suit == 'Hearts'%}
+        <div style="color:red">{{ card }}
+        </div>
+         {% else %}
+            <div style="color:black">{{ card }}
+        </div>
+            {% endif %}
+    </p>
+    {% endfor %}
+
+    </p>
+    <p id="playerTotal">
+    <p>Player Total - {{hand_totals.pTotal}}</p>
+    </p>
+    </td>
+    </tr>
+    </table>
+
+    <b>
+    <table>
+    <tr align="center">
+        {%if hand_totals.gTotal == -1 %}
+    <p>BUST</p>
+    {% elif hand_totals.gTotal == 1 %}
+        <p>Dealer Busts, you win</p>
+    {% elif hand_totals.gTotal == -2 %}
+        <p>You Lost</p>
+    {% elif hand_totals.gTotal == 2 %}
+        <p>You Win</p>
+    {% elif hand_totals.gTotal == 0 %}
+        <p>Push</p>
+    {% elif hand_totals.gTotal == 100 %}
+        <p>Player Blackjack!</p>
+    {% elif hand_totals.gTotal == -100 %}
+        <p>Dealer Blackjack!</p>
+    {% else %}
+        <p></p>
+    {% endif %}
+    </tr>
+    </table>
+    </b>
+
+
+
+    <form action="#" onsubmit="displayBet()">
+        <div class="select">
+            <select id="betDropdown">
+                <option>1
+                <option>2
+                <option>5
+                <option>10
+                <option>25
+                <option>50
+                <option>Other
+            </select>
+        </div>
+        <button type="submit">Place Bet</button>
+    </form>
+
+    <script>
+        function displayBet() {
+            let betDropdown = document.getElementById("betDropdown");
+            let betStr = betDropdown.options[betDropdown.selectedIndex].text;
+            document.getElementById("currentBet").innerHTML = betStr + " credits";
+        }
+    </script>
+
+    <p></p>
+    <table>
+    <tr>
+    <form action="/bj/hit" method="get">
+        <button class="button is-primary is-light is-large">Hit</button>
+    </form>
+    <form action ="/bj/stand" method="get">
+        <button class="button is-danger is-light is-large ">Stand</button>
+    </form>
+    </tr>
+    </table>
+    <!--<button class="button is-info is-light">Double Down</button-->
+    <!--<button class="button is-warning is-light">Split</button>>
+</div>
+{% else %}
+<p style="position:relative; left:60px; top:2px;"> Please <a href="{{ url_for('auth.login') }}">log in</a>/<a
+        href="{{ url_for('auth.register') }}">register</a> to play.</p>
+{% endif %}
+</body>
+{% endblock %}

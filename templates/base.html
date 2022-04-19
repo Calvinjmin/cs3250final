@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<title>{% block title %}{% endblock %} - Blackjack</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='bulma.css') }}" />
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <h1 class="navbar-item">
+    <a href="{{ url_for('index.index_page') }}">Blackjack</a>
+  </h1>
+  <div class="navbar-end">
+    <div class="navbar-item has-dropdown is-hoverable">
+      {% if g.user %}
+      <a class="navbar-link"> {{ g.user['username'] }} </a>
+      {% else %}
+      <a class="navbar-link"> Stranger </a>
+      {% endif %}
+      <div class="navbar-dropdown">
+        {% if g.user %}
+        <a class="navbar-item" href="{{ url_for('auth.profile') }}">Profile</a>
+        <a class="navbar-item" href="{{ url_for('auth.logout') }}">Log Out</a>
+        {% else %}
+        <a class="navbar-item" href="{{ url_for('auth.login') }}">Log In</a>
+        <a class="navbar-item" href="{{ url_for('auth.register') }}"
+          >Register</a
+        >
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="content">
+  <header>{% block header %}{% endblock %}</header>
+  {% block content %}{% endblock %}
+</section>
