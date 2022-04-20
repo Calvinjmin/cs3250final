@@ -4,6 +4,20 @@
 {% endblock %}
 
 {% block content %}
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <h1 class="navbar-item">
+    <a href="{{ url_for('index.index_page') }}">Blackjack</a>
+  </h1>
+  <div class="navbar-end">
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link">{{jsonCredits.credits}} Credits</a>
+      <div class="navbar-dropdown is-right">
+        <a class="navbar-item" href="{{ url_for('index.addCredits') }}">Add Credit</a>
+        <a class="navbar-item" href="{{ url_for('index.resetCredits') }}">Reset Credit</a>
+      </div>
+    </div>
+  </div>
+</nav>
 
 <body xmlns="http://www.w3.org/1999/html">
 <p style="position:relative; left:60px; top:2px;">Software Testing Project - Calvin Min (cjm9vr) & Kiyan Zewer
@@ -11,9 +25,7 @@
 
 <div style="position:relative; left:60px; top:2px;">
 
-
-    <p>Personal Credits: {{ g.user['credit'] }}</p>
-    <p id="currentBet">Hand Bet: 0 credits</p>
+    <p id="currentBet">Placed Bet: {{jsonCredits.betCredit}} Credits</p>
 
 
     <form action="/bj/reset" method="get">
@@ -107,9 +119,9 @@
 
 
 
-    <form action="#" onsubmit="displayBet()">
+    <form action="/placeBet" method="post">
         <div class="select">
-            <select id="betDropdown">
+            <select name="betDropdown" id="betDropdown">
                 <option>1
                 <option>2
                 <option>5
@@ -121,14 +133,6 @@
         </div>
         <button type="submit">Place Bet</button>
     </form>
-
-    <script>
-        function displayBet() {
-            let betDropdown = document.getElementById("betDropdown");
-            let betStr = betDropdown.options[betDropdown.selectedIndex].text;
-            document.getElementById("currentBet").innerHTML = betStr + " credits";
-        }
-    </script>
 
     <p></p>
     <table>

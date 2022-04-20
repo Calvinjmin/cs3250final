@@ -1,5 +1,5 @@
 import flask
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, g, request
 
 from classes import Card, Deck
 
@@ -35,13 +35,39 @@ hand_totals = {'pTotal': playerTotal, 'dTotal': dealerTotal, 'gTotal':gameTotal}
 show = {'show': s}
 
 
+jsonCredits = {'credits': 100 , 'betCredit' : 0}
+
 @idx.route('/')
 def index_page():
-    return render_template('index.html', card_data=card_data, hand_totals=hand_totals, show=show)
+    return render_template('index.html', jsonCredits = jsonCredits , card_data=card_data, hand_totals=hand_totals, show=show)
+
+
+@idx.route('/resetCredits')
+def resetCredits():
+    jsonCredits['credits'] = 100
+    return flask.redirect(flask.url_for('index.index_page'))
+
+
+@idx.route('/addCredits')
+def addCredits():
+    jsonCredits['credits'] = int(jsonCredits['credits']) + 50
+    return flask.redirect(flask.url_for('index.index_page'))
+
+
+@idx.route('/placeBet',  methods=('GET', 'POST'))
+def placeBet():
+    if request.method == 'POST':
+        betAmount = int(request.form['betDropdown'])
+        if betAmount <= int(jsonCredits['credits']):
+            jsonCredits['credits'] -= betAmount
+            jsonCredits['betCredit'] = betAmount
+
+    return flask.redirect(flask.url_for('index.index_page'))
 
 
 @idx.route('/bj/reset')
 def reset_hand():
+    jsonCredits['betCredit'] = 0
     fourDecks = []
     for i in range(4):
         for x in single_deck:
@@ -113,11 +139,14 @@ def stand():
             if hand_totals['dTotal'] > 21:
                 hand_totals['gTotal'] = 1
         if hand_totals['dTotal'] > 21:
+            jsonCredits['credits'] += 2 * int(jsonCredits['betCredit'])
             hand_totals['gTotal'] = 1
         elif hand_totals['dTotal'] > hand_totals['pTotal']:
             hand_totals['gTotal'] = -2
         elif hand_totals['dTotal'] == hand_totals['pTotal']:
+            jsonCredits['credits'] += int(jsonCredits['betCredit'])
             hand_totals['gTotal'] = 0
         else:
             hand_totals['gTotal'] = 2
+            jsonCredits['credits'] += 2 * int(jsonCredits['betCredit'])
     return flask.redirect(flask.url_for('index.index_page'))
