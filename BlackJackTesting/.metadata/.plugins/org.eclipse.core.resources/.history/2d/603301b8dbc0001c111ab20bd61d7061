@@ -37,7 +37,6 @@ class BlackjackSelenium
       // close the browser
       driver.close();           
    }
-
    
    /*
     * The Title should be '- Blackjack'
@@ -46,7 +45,6 @@ class BlackjackSelenium
    public void testTitle() {
 	   assertEquals(driver.getTitle(), "- Blackjack");
    }
-   
    
    /*
     * This tests the log in feature
@@ -92,16 +90,10 @@ class BlackjackSelenium
    public void testHit() {
 	   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
 	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
-	   WebElement f = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
-	   while(e.getText().equals("Player Total - 21") && f.getText().equals("Dealer Total - 21")) {
-		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
-		   e = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
-		   f = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
-	   }
 	   int playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
 	   driver.findElement(By.name("hitbutton")).click();
-	   WebElement g = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
-	   int newPlayerTotal = Integer.parseInt(g.getText().substring(g.getText().indexOf("-") + 2));
+	   WebElement f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+	   int newPlayerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
 	   assertTrue(playerTotal != newPlayerTotal);
    }
    
@@ -116,9 +108,6 @@ class BlackjackSelenium
 	   String player = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]")).getText();
 	   while(dealer.equals("Dealer Total - 21") || player.equals("Player Total - 21")){
 		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
-		   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
-		   dealer = e.getText();
-		   player = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]")).getText();
 	   }
 	   driver.findElement(By.xpath("//button[text()='Stand']")).click();
 	   WebElement f = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
@@ -174,9 +163,6 @@ class BlackjackSelenium
    @Test
    public void standThenHit() {
 	   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
-	   while(driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]")).getText().equals("Dealer Total - 21")) {
-		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
-	   }
 	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
 	   int playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
 	   driver.findElement(By.xpath("//button[text()='Stand']")).click();
@@ -197,9 +183,6 @@ class BlackjackSelenium
 	   int playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
 	   while(f.getText().equals("Dealer Total - 21") || playerTotal == 21) {
 		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
-		   e = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
-		   f = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
-		   playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
 	   }
 	   while(playerTotal < 21){
 		   driver.findElement(By.xpath("//button[text()='Hit']")).click();

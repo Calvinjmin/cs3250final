@@ -174,9 +174,6 @@ class BlackjackSelenium
    @Test
    public void standThenHit() {
 	   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
-	   while(driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]")).getText().equals("Dealer Total - 21")) {
-		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
-	   }
 	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
 	   int playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
 	   driver.findElement(By.xpath("//button[text()='Stand']")).click();

@@ -16,7 +16,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 class BlackjackSelenium 
 {
    private WebDriver driver;
-   private String url = "https://cs3250final.herokuapp.com/";
+   private String url = "http://127.0.0.1:5000/";
    
    @BeforeEach
    void setUp() throws Exception 
