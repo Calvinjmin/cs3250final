@@ -22,7 +22,7 @@ class BlackjackSelenium
    void setUp() throws Exception 
    {
       // configure path to the driver
-      System.setProperty("webdriver.chrome.driver", "/Users/kiyanzewer/Desktop/chromedriver");
+      System.setProperty("webdriver.chrome.driver", "/Users/kiyanzewer/Documents/cs3250final/chromedriver/");
           
       // create an instance of the web browser and open it    
       driver = new ChromeDriver();   
@@ -177,21 +177,20 @@ class BlackjackSelenium
    public void hitUntilBust() {
 	   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
 	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+	   WebElement f = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
 	   int playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
+	   while(f.getText().equals("Dealer Total - 21") || playerTotal == 21) {
+		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   }
 	   while(playerTotal < 21){
 		   driver.findElement(By.xpath("//button[text()='Hit']")).click();
 		   e = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
 		   playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
 	   }
-	   if(playerTotal == 21) {
-		   assertEquals(playerTotal, 21);
-	   }
-	   else {
-		   driver.findElement(By.xpath("//button[text()='Hit']")).click();
-		   e = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
-		   int newPlayerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
-		   assertEquals(playerTotal, newPlayerTotal);
-	   }
+	   driver.findElement(By.xpath("//button[text()='Hit']")).click();
+	   e = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+	   int newPlayerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
+	   assertEquals(playerTotal, newPlayerTotal);
    }
    
 }   
