@@ -85,7 +85,7 @@
     <table>
     <tr align="center">
         {%if hand_totals.gTotal == -1 %}
-    <p>BUST</p>
+    <p>Bust, you lose</p>
     {% elif hand_totals.gTotal == 1 %}
         <p>Dealer Busts, you win</p>
     {% elif hand_totals.gTotal == -2 %}
@@ -134,10 +134,10 @@
     <table>
     <tr>
     <form action="/bj/hit" method="get">
-        <button class="button is-primary is-light is-large">Hit</button>
+        <button id='hitbutton' name ='hitbutton' class="button is-primary is-light is-large">Hit</button>
     </form>
     <form action ="/bj/stand" method="get">
-        <button class="button is-danger is-light is-large ">Stand</button>
+        <button id='standbutton' name ='standbutton' type='submit' onclick="document.getElementById('hitbutton').click();" class="button is-danger is-light is-large ">Stand</button>
     </form>
     </tr>
     </table>
