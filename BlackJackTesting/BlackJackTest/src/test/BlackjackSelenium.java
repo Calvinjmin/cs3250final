@@ -16,7 +16,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 class BlackjackSelenium 
 {
    private WebDriver driver;
-   private String url = "https://cs3250final.herokuapp.com/";
+   private String url = "http://127.0.0.1:5000/";
    
    @BeforeEach
    void setUp() throws Exception 
@@ -212,4 +212,255 @@ class BlackjackSelenium
 	   assertEquals(playerTotal, newPlayerTotal);
    }
    
+   /*
+    * if the card is diamond the text is red
+    */
+   @Test
+   public void diamondIsRed() {
+	   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   driver.findElement(By.xpath("//button[text()='Stand']")).click();
+	   while(!driver.getPageSource().contains("Diamond")) {
+		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   }
+	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Diamond')]"));
+	   String color = e.getCssValue("color");
+	   assertEquals("rgba(255, 0, 0, 1)", color);
+   }
+   
+   /*
+    * if the card is heart the text is red
+    */
+   @Test
+   public void heartIsRed() {
+	   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   driver.findElement(By.xpath("//button[text()='Stand']")).click();
+	   while(!driver.getPageSource().contains("Heart")) {
+		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   }
+	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Heart')]"));
+	   String color = e.getCssValue("color");
+	   assertEquals("rgba(255, 0, 0, 1)", color);
+   }
+   
+   /*
+    * if the card is a club the text is black
+    */
+   @Test
+   public void clubIsBlack() {
+	   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   driver.findElement(By.xpath("//button[text()='Stand']")).click();
+	   while(!driver.getPageSource().contains("Clubs")) {
+		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   }
+	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Clubs')]"));
+	   String color = e.getCssValue("color");
+	   assertEquals("rgba(0, 0, 0, 1)", color);
+   }
+   
+   /*
+    * if the card is a spade the text is black
+    */
+   @Test
+   public void spadesIsBlack() {
+	   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   driver.findElement(By.xpath("//button[text()='Stand']")).click();
+	   while(!driver.getPageSource().contains("Spades")) {
+		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   }
+	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Spades')]"));
+	   String color = e.getCssValue("color");
+	   assertEquals("rgba(0, 0, 0, 1)", color);
+   }
+   
+   /*
+    * result should be bust if player busts
+    */
+   @Test
+   public void checkPlayerResultIsBust() {
+	   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+	   int playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
+	   while(playerTotal == 21) {
+		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   }
+	   while(playerTotal < 21) {
+		   driver.findElement(By.xpath("//button[text()='Hit']")).click();
+		   e = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+		   playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
+		   if(playerTotal == 21) {
+			   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+			   e = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+			   playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
+		   }
+	   }
+	   assertTrue(driver.getPageSource().contains("Bust, you lose"));
+   }
+   
+   /*
+    * result should be dealer busts if the dealer busts
+    */
+   @Test
+   public void checkDealerResultIsBust() {
+	   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+	   String dealer = e.getText();
+	   while(dealer.contains("21")) {
+		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   }
+	   driver.findElement(By.xpath("//button[text()='Stand']")).click();
+	   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+	   int dealerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
+	   while(dealerTotal < 22) {
+		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+		   driver.findElement(By.xpath("//button[text()='Stand']")).click();
+		   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+		   dealerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
+	   }
+	   assertTrue(driver.getPageSource().contains("Dealer Busts, you win"));
+   }
+   
+   /*
+    * result should be push if it is a tie
+    */
+   @Test
+   public void testPush() {
+	   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   driver.findElement(By.xpath("//button[text()='Stand']")).click();
+	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+	   int dealerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
+	   WebElement f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+	   int playerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
+	   while(dealerTotal != playerTotal) {
+		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+		   driver.findElement(By.xpath("//button[text()='Stand']")).click();
+		   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+		   dealerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
+		   f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+		   playerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
+	   }
+	   assertTrue(driver.getPageSource().contains("Push"));
+   }
+   
+   /*
+    * result should be push if both dealer and player get blackjack
+    * only problem with this test it is very long and can take minutes long
+    */
+   @Test
+   public void testPushOnBJ() {
+	   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+	   WebElement f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+	   String dealer = e.getText().substring(e.getText().indexOf("-") + 2);
+	   String player = f.getText().substring(e.getText().indexOf("-") + 2);
+	   while(!dealer.equals(player)) {
+		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+		   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+		   f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+		   dealer = e.getText().substring(e.getText().indexOf("-") + 2);
+		   player = f.getText().substring(e.getText().indexOf("-") + 2);
+	   }
+	   assertTrue(driver.getPageSource().contains("Push") && dealer.equals("21") && player.equals("21"));
+   }
+   
+   /*
+    * result should be player wins if stand and has value larger than dealer without busting
+    */
+   @Test
+   public void testWinWithoutDealerBust() {
+	   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+	   WebElement f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+	   String dealer = e.getText().substring(e.getText().indexOf("-") + 2);
+	   int playerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
+	   while(dealer.contains("21") || playerTotal == 21) {
+		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+		   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+		   f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+		   dealer = e.getText().substring(e.getText().indexOf("-") + 2);
+		   playerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
+	   }
+	   driver.findElement(By.xpath("//button[text()='Stand']")).click();
+	   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+	   dealer = e.getText().substring(e.getText().indexOf("-") + 2);
+	   int dealerTotal = Integer.parseInt(dealer);
+	   while(dealerTotal >= 21 || dealerTotal >= playerTotal && dealerTotal <= 21) {
+		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+		   driver.findElement(By.xpath("//button[text()='Stand']")).click();
+		   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+		   f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+		   dealerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
+		   playerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
+	   }
+	   assertTrue(driver.getPageSource().contains("You Win"));
+   }
+   
+   /*
+    * result should be player loses if stand and has value smaller than dealer without busting
+    */
+   @Test
+   public void testLoseWithoutDealerBust() {
+	   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+	   WebElement f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+	   String dealer = e.getText().substring(e.getText().indexOf("-") + 2);
+	   int playerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
+	   while(dealer.contains("21") || playerTotal == 21) {
+		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+		   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+		   f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+		   dealer = e.getText().substring(e.getText().indexOf("-") + 2);
+		   playerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
+	   }
+	   driver.findElement(By.xpath("//button[text()='Stand']")).click();
+	   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+	   dealer = e.getText().substring(e.getText().indexOf("-") + 2);
+	   int dealerTotal = Integer.parseInt(dealer);
+	   while(dealerTotal >= 21 || dealerTotal <= playerTotal && dealerTotal <= 21) {
+		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+		   driver.findElement(By.xpath("//button[text()='Stand']")).click();
+		   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+		   f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+		   dealerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
+		   playerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
+	   }
+	   assertTrue(driver.getPageSource().contains("You Lose"));
+   }
+   
+   /*
+    * hit without busting and win
+    */
+   @Test
+   public void testHitNoBustWin() {
+	   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   driver.findElement(By.xpath("//button[text()='Hit']")).click();
+	   driver.findElement(By.xpath("//button[text()='Stand']")).click();
+	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+	   WebElement f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+	   String dealer = e.getText().substring(e.getText().indexOf("-") + 2);
+	   int playerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
+	   int dealerTotal = Integer.parseInt(dealer);
+	   while(dealerTotal >= 21 || playerTotal <= dealerTotal || playerTotal >= 21) {
+		   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+		   driver.findElement(By.xpath("//button[text()='Hit']")).click();
+		   driver.findElement(By.xpath("//button[text()='Stand']")).click();
+		   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+		   dealer = e.getText().substring(e.getText().indexOf("-") + 2);
+		   dealerTotal = Integer.parseInt(dealer);
+		   f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+		   playerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
+	   }
+	   assertTrue(driver.getPageSource().contains("You Win"));
+   }
+   
+   /*
+    * dealer total should be hidden even if player hits
+    * dealer should only show hand when player stands
+    */
+   @Test
+   public void testDealerHiddenUntilStand() {
+	   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
+	   driver.findElement(By.xpath("//button[text()='Hit']")).click();
+	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+	   assertTrue(e.getText().contains("HIDDEN"));
+   }
 }   
