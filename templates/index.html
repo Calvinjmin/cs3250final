@@ -28,9 +28,10 @@
     <p id="currentBet">Placed Bet: {{jsonCredits.betCredit}} Credits</p>
 
 
-    <form action="/bj/reset" method="get">
+    <!-- <form action="/bj/reset" method="get">
         <button type="submit">New Hand</button>
     </form>
+    -->
 
     <table class="no-spacing"; cellspacing="0">
     <tr>
@@ -97,19 +98,19 @@
     <table>
     <tr align="center">
         {%if hand_totals.gTotal == -1 %}
-    <p>Bust, you lose</p>
+    <p>Bust, you lose. You lost {{jsonCredits.betCredit}} credit(s).</p>
     {% elif hand_totals.gTotal == 1 %}
-        <p>Dealer Busts, you win</p>
+        <p>Dealer Busts, you win! You won {{jsonCredits.betCredit}} credit(s)!</p>
     {% elif hand_totals.gTotal == -2 %}
-        <p>You Lose</p>
+        <p>You Lose. You lost {{jsonCredits.betCredit}} credit(s).</p>
     {% elif hand_totals.gTotal == 2 %}
-        <p>You Win</p>
+        <p>You Win. You won {{jsonCredits.betCredit}} credit(s)!</p>
     {% elif hand_totals.gTotal == 0 %}
-        <p>Push</p>
+        <p>Push, no credits were won or lost.</p>
     {% elif hand_totals.gTotal == 100 %}
-        <p>Player Blackjack!</p>
+        <p>Player Blackjack! You win 2x the normal winnings for a total of {{jsonCredits.betCredit * 2}} credit(s).</p>
     {% elif hand_totals.gTotal == -100 %}
-        <p>Dealer Blackjack!</p>
+        <p>Dealer Blackjack! You lost {{jsonCredits.betCredit}} credit(s).</p>
     {% else %}
         <p></p>
     {% endif %}
@@ -122,13 +123,13 @@
     <form action="/placeBet" method="post">
         <div class="select">
             <select name="betDropdown" id="betDropdown">
+                <option>0
                 <option>1
                 <option>2
                 <option>5
                 <option>10
                 <option>25
                 <option>50
-                <option>Other
             </select>
         </div>
         <button type="submit">Place Bet</button>
