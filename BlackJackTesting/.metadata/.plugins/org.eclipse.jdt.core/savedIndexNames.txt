@@ -52,8 +52,8 @@ INDEX VERSION 1.131+/Users/kiyanzewer/Documents/cs3250final/BlackJackTesting/.me
 497561997.index
 3641741821.index
 907439491.index
-1099278344.index
 1293703949.index
+1099278344.index
 1005812547.index
 1491259282.index
 116869167.index

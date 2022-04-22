@@ -16,6 +16,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 class BlackjackSelenium 
 {
    private WebDriver driver;
+   // This is our Blackjack website we created and hosted.
    private String url = "http://127.0.0.1:5000/";
    
    @BeforeEach
@@ -40,6 +41,7 @@ class BlackjackSelenium
 
    
    /*
+    * Kiyan Zewer test 1/20
     * The Title should be '- Blackjack'
     */
    @Test
@@ -47,25 +49,9 @@ class BlackjackSelenium
 	   assertEquals(driver.getTitle(), "- Blackjack");
    }
    
-   
    /*
-    * This tests the log in feature
-    */
-//   @Test
-//   public void testLogIn() {
-//	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'log in')]"));
-//	   e.click();
-//	   WebElement f = driver.findElement(By.name("username"));
-//	   f.sendKeys("kiyan");
-//	   WebElement g = driver.findElement(By.name("password"));
-//	   g.sendKeys("zewer");
-//	   driver.findElement(By.name("login")).click();
-//	   WebElement h = driver.findElement(By.xpath("//*[contains(text(), 'kiyan')]"));
-//	   assertEquals("kiyan",h.getText());
-//   }
-   
-   /*
-    * Clicking New Hand should result in a player total less than 22 
+    * Kiyan Zewer test 2/20
+    * Clicking Place Bet should result in a player total less than 22 
     * as 21 is the largest possible starting hand
     */
    @Test
@@ -78,6 +64,7 @@ class BlackjackSelenium
    }
    
    /*
+    * Kiyan Zewer test 3/20
     * Clicking hit as the first move should always result in a new player total value
     */
    @Test
@@ -98,6 +85,7 @@ class BlackjackSelenium
    }
    
    /*
+    * Kiyan Zewer test 4/20
     * Clicking stand should change the Dealer Hand from hidden to shown
     */
    @Test
@@ -119,6 +107,7 @@ class BlackjackSelenium
    }
    
    /*
+    * Kiyan Zewer test 5/20
     * Clicking the stand button should keep the same Player Total value
     */
    @Test
@@ -133,7 +122,9 @@ class BlackjackSelenium
    }
    
    /*
-    * If the dealer has blackjack the game should show their cards and show the total as 21 not hidden
+    * Kiyan Zewer test 6/20
+    * If the dealer has blackjack the game should show their cards and show 
+    * the total as 21 not hidden
     */
    @Test
    public void dealerBlackJack(){
@@ -148,6 +139,7 @@ class BlackjackSelenium
    }
    
    /*
+    * Kiyan Zewer test 7/20
     * If the player has blackjack the game should show their total as 21
     */
    @Test
@@ -163,6 +155,7 @@ class BlackjackSelenium
    }
    
    /*
+    * Kiyan Zewer test 8/20
     * If the player clicks stand then the hit button should have no function
     * therefore, their total will be the same after clicking hit
     */
@@ -182,6 +175,7 @@ class BlackjackSelenium
    }
    
    /*
+    * Kiyan Zewer test 9/20
     * Clicking hit after you bust will not do anything as the game is over
     */
    @Test
@@ -208,6 +202,7 @@ class BlackjackSelenium
    }
    
    /*
+    * Kiyan Zewer test 10/20
     * if the card is diamond the text is red
     */
    @Test
@@ -224,6 +219,7 @@ class BlackjackSelenium
    }
    
    /*
+    * Kiyan Zewer test 11/20
     * if the card is heart the text is red
     */
    @Test
@@ -240,6 +236,7 @@ class BlackjackSelenium
    }
    
    /*
+    * Kiyan Zewer test 12/20
     * if the card is a club the text is black
     */
    @Test
@@ -256,6 +253,7 @@ class BlackjackSelenium
    }
    
    /*
+    * Kiyan Zewer test 13/20
     * if the card is a spade the text is black
     */
    @Test
@@ -272,6 +270,7 @@ class BlackjackSelenium
    }
    
    /*
+    * Kiyan Zewer test 14/20
     * result should be bust if player busts
     */
    @Test
@@ -298,6 +297,7 @@ class BlackjackSelenium
    }
    
    /*
+    * Kiyan Zewer test 15/20
     * result should be dealer busts if the dealer busts
     */
    @Test
@@ -327,6 +327,7 @@ class BlackjackSelenium
    }
    
    /*
+    * Kiyan Zewer test 16/20
     * result should be push if it is a tie
     */
    @Test
@@ -350,6 +351,7 @@ class BlackjackSelenium
    
    
    /*
+    * Kiyan Zewer test 17/20
     * result should be player wins if stand and has value larger than dealer without busting
     */
    @Test
@@ -373,7 +375,9 @@ class BlackjackSelenium
    }
    
    /*
-    * result should be player loses if stand and has value smaller than dealer without busting
+    * Kiyan Zewer test 18/20
+    * result should be player loses if they stand and they have a value smaller 
+    * than the dealer without busting
     */
    @Test
    public void testLoseWithoutDealerBust() {
@@ -396,7 +400,8 @@ class BlackjackSelenium
    }
    
    /*
-    * hit without busting and win
+    * Kiyan Zewer test 19/20
+    * Player hits without busting and wins
     */
    @Test
    public void testHitNoBustWin() {
@@ -422,6 +427,7 @@ class BlackjackSelenium
    }
    
    /*
+    * Kiyan Zewer test 20/20
     * dealer total should be hidden unless player stands or game is over
     */
    @Test
