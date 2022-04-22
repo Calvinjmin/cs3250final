@@ -135,7 +135,7 @@ class BlackjackSelenium
 		   driver.findElement(By.xpath("//button[text()='Place Bet']")).click();
 		   dealerTotal = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]")).getText();
 	   }
-	   assertTrue(driver.getPageSource().contains("Dealer Blackjack") && dealerTotal.contains("21"));
+	   assertTrue(driver.getPageSource().contains("Dealer Blackjack. You lost"));
    }
    
    /*
@@ -151,7 +151,7 @@ class BlackjackSelenium
 		   driver.findElement(By.xpath("//button[text()='Place Bet']")).click();
 		   playerTotal = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]")).getText();
 	   }
-	   assertTrue(driver.getPageSource().contains("Player Blackjack") && playerTotal.contains("Player Total - 21"));
+	   assertEquals(playerTotal, "Player Total - 21");
    }
    
    /*

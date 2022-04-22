@@ -12,8 +12,9 @@
     <div class="navbar-item has-dropdown is-hoverable">
       <a class="navbar-link">{{jsonCredits.credits}} Credits</a>
       <div class="navbar-dropdown is-right">
-        <a class="navbar-item" href="{{ url_for('index.addCredits') }}">Add Credit</a>
-        <a class="navbar-item" href="{{ url_for('index.resetCredits') }}">Reset Credit</a>
+        <a class="navbar-item" href="{{ url_for('index.addCredits') }}">Add 10 Credits</a>
+        <a class="navbar-item" href="{{ url_for('index.subCredits') }}">Subtract 10 Credits</a>
+        <a class="navbar-item" href="{{ url_for('index.resetCredits') }}">Set Credits to 100 if you ran out</a>
       </div>
     </div>
   </div>

@@ -124,7 +124,7 @@ class BlackjackSelenium
    /*
     * Kiyan Zewer test 6/20
     * If the dealer has blackjack the game should show their cards and show 
-    * the total as 21 not hidden and that they won as long as the dealer did not also get a Blackjack
+    * the total as 21 not hidden
     */
    @Test
    public void dealerBlackJack(){
@@ -135,7 +135,7 @@ class BlackjackSelenium
 		   driver.findElement(By.xpath("//button[text()='Place Bet']")).click();
 		   dealerTotal = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]")).getText();
 	   }
-	   assertTrue(driver.getPageSource().contains("Dealer Blackjack") && dealerTotal.contains("21"));
+	   assertEquals(dealerTotal, "Dealer Total - 21");
    }
    
    /*
@@ -151,7 +151,7 @@ class BlackjackSelenium
 		   driver.findElement(By.xpath("//button[text()='Place Bet']")).click();
 		   playerTotal = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]")).getText();
 	   }
-	   assertTrue(driver.getPageSource().contains("Player Blackjack") && playerTotal.contains("Player Total - 21"));
+	   assertEquals(playerTotal, "Player Total - 21");
    }
    
    /*
