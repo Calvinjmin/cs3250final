@@ -88,13 +88,7 @@ def resetDeck():
 @idx.route('/bj/reset')
 def reset_hand():
     if bet['betPlaced'] == True:
-        fourDecks = []
-        for i in range(4):
-            for x in single_deck:
-                fourDecks.append(x)
-
-        deck = Deck(fourDecks)
-        deck.setDeck(fourDecks)
+        resetDeck()
 
         show['show'] = False
         newPC1 = deck.dealCard()
