@@ -36,7 +36,7 @@ class BlackjackSelenium
    void tearDown() throws Exception 
    {
       // close the browser
-               
+      driver.close();           
    }
 
    
