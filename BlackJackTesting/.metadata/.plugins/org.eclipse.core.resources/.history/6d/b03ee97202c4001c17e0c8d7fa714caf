@@ -17,7 +17,7 @@ class BlackjackSelenium
 {
    private WebDriver driver;
    // This is our Blackjack website we created and hosted.
-   private String url = "http://cjm9vr.pythonanywhere.com/";
+   private String url = "http://127.0.0.1:5000/";
    
    @BeforeEach
    void setUp() throws Exception 
@@ -288,7 +288,7 @@ class BlackjackSelenium
 		   e = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
 		   playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
 		   if(playerTotal == 21) {
-			   driver.findElement(By.xpath("//button[text()='Place Bet']")).click();
+			   driver.findElement(By.xpath("//button[text()='New Hand']")).click();
 			   e = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
 			   playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
 		   }
