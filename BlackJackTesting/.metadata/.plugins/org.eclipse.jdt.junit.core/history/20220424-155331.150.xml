@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="BlackjackSelenium" project="BlackJackTest" tests="20" started="20" failures="0" errors="0" ignored="0">
+  <testsuite name="test.BlackjackSelenium" time="194.493" displayname="BlackjackSelenium" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]">
+    <testcase name="testDealerHiddenUntilStand" classname="test.BlackjackSelenium" time="14.897" displayname="testDealerHiddenUntilStand()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:testDealerHiddenUntilStand()]"/>
+    <testcase name="checkPlayerResultIsBust" classname="test.BlackjackSelenium" time="8.746" displayname="checkPlayerResultIsBust()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:checkPlayerResultIsBust()]"/>
+    <testcase name="testStandShowsText" classname="test.BlackjackSelenium" time="8.064" displayname="testStandShowsText()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:testStandShowsText()]"/>
+    <testcase name="checkDealerResultIsBust" classname="test.BlackjackSelenium" time="8.263" displayname="checkDealerResultIsBust()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:checkDealerResultIsBust()]"/>
+    <testcase name="testHit" classname="test.BlackjackSelenium" time="7.985" displayname="testHit()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:testHit()]"/>
+    <testcase name="testWinWithoutDealerBust" classname="test.BlackjackSelenium" time="14.481" displayname="testWinWithoutDealerBust()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:testWinWithoutDealerBust()]"/>
+    <testcase name="testTitle" classname="test.BlackjackSelenium" time="11.005" displayname="testTitle()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:testTitle()]"/>
+    <testcase name="testPush" classname="test.BlackjackSelenium" time="8.554" displayname="testPush()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:testPush()]"/>
+    <testcase name="testHitNoBustWin" classname="test.BlackjackSelenium" time="19.921" displayname="testHitNoBustWin()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:testHitNoBustWin()]"/>
+    <testcase name="standThenHit" classname="test.BlackjackSelenium" time="6.942" displayname="standThenHit()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:standThenHit()]"/>
+    <testcase name="playerBlackJack" classname="test.BlackjackSelenium" time="14.515" displayname="playerBlackJack()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:playerBlackJack()]"/>
+    <testcase name="clubIsBlack" classname="test.BlackjackSelenium" time="10.065" displayname="clubIsBlack()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:clubIsBlack()]"/>
+    <testcase name="dealerBlackJack" classname="test.BlackjackSelenium" time="9.636" displayname="dealerBlackJack()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:dealerBlackJack()]"/>
+    <testcase name="diamondIsRed" classname="test.BlackjackSelenium" time="6.82" displayname="diamondIsRed()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:diamondIsRed()]"/>
+    <testcase name="testResetPlayerTotal" classname="test.BlackjackSelenium" time="6.629" displayname="testResetPlayerTotal()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:testResetPlayerTotal()]"/>
+    <testcase name="testLoseWithoutDealerBust" classname="test.BlackjackSelenium" time="6.911" displayname="testLoseWithoutDealerBust()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:testLoseWithoutDealerBust()]"/>
+    <testcase name="spadesIsBlack" classname="test.BlackjackSelenium" time="6.755" displayname="spadesIsBlack()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:spadesIsBlack()]"/>
+    <testcase name="heartIsRed" classname="test.BlackjackSelenium" time="6.675" displayname="heartIsRed()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:heartIsRed()]"/>
+    <testcase name="hitUntilBust" classname="test.BlackjackSelenium" time="7.107" displayname="hitUntilBust()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:hitUntilBust()]"/>
+    <testcase name="testStandKeepsSameValue" classname="test.BlackjackSelenium" time="10.521" displayname="testStandKeepsSameValue()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:testStandKeepsSameValue()]"/>
+  </testsuite>
+</testrun>
