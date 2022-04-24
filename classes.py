@@ -23,3 +23,6 @@ class Deck:
 
     def setDeck(self, new_cards):
         self.cards = new_cards
+
+    def getNumberCards( self ):
+        return len(self.cards)
