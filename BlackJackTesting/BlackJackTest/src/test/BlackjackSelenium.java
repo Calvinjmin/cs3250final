@@ -39,11 +39,7 @@ class BlackjackSelenium
    void tearDown() throws Exception
    {
       // close the browser
-<<<<<<< HEAD
       driver.close();
-=======
-               
->>>>>>> master
    }
 
 
@@ -805,5 +801,5 @@ class BlackjackSelenium
 	   WebElement authors = driver.findElement(By.id("authors"));
 	   assertTrue( authors.getText().contains("Software Testing Project") && !authors.getText().contains("Computer Architecture") );
    }
-   
+
 }
