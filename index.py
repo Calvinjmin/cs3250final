@@ -39,8 +39,6 @@ jsonCredits = {'credits': 100, 'betCredit' : 0}
 
 @idx.route('/')
 def index_page():
-    if deck.getNumberCards() < 10:
-        resetDeck()
     return render_template('index.html', jsonCredits = jsonCredits , card_data=card_data, hand_totals=hand_totals, show=show)
 
 
@@ -78,6 +76,7 @@ def placeBet():
 
 
 def resetDeck():
+    global deck
     fourDecks = []
     for i in range(4):
         for x in single_deck:
