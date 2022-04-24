@@ -10,18 +10,18 @@
   </h1>
   <div class="navbar-end">
     <div class="navbar-item has-dropdown is-hoverable">
-      <a class="navbar-link">{{jsonCredits.credits}} Credits</a>
+      <a id='userCredits' class="navbar-link">{{jsonCredits.credits}} Credits</a>
       <div class="navbar-dropdown is-right">
-        <a class="navbar-item" href="{{ url_for('index.addCredits') }}">Add 10 Credits</a>
-        <a class="navbar-item" href="{{ url_for('index.subCredits') }}">Subtract 10 Credits</a>
-        <a class="navbar-item" href="{{ url_for('index.resetCredits') }}">Set Credits to 100 if you have none</a>
+        <a id='addCredits' class="navbar-item" href="{{ url_for('index.addCredits') }}">Add 10 Credits</a>
+        <a id='subCredits' class="navbar-item" href="{{ url_for('index.subCredits') }}">Subtract 10 Credits</a>
+        <a id='resetCredits' class="navbar-item" href="{{ url_for('index.resetCredits') }}">Set Credits to 100 if you have none</a>
       </div>
     </div>
   </div>
 </nav>
 
 <body xmlns="http://www.w3.org/1999/html">
-<p style="position:relative; left:60px; top:2px;">Software Testing Project - Calvin Min (cjm9vr) & Kiyan Zewer
+<p id="authors" style="position:relative; left:60px; top:2px;">Software Testing Project - Calvin Min (cjm9vr) & Kiyan Zewer
     (kkz6dh)</p>
 
 <div style="position:relative; left:60px; top:2px;">
@@ -58,17 +58,17 @@
         <div style="color:red">{{ card_data.dealerCards[0] }}
         </div>
             <p></p>
-            <div>SECOND CARD HIDDEN</div>
+            <div><p id="dealerSecondCard">SECOND CARD HIDDEN</p></div>
          <p>{% else %}
             <div style="color:black">{{ card_data.dealerCards[0] }}
             <p></p>
                      <p>
         </div>
-            <div>SECOND CARD HIDDEN</div>
+            <div><p id="dealerSecondCard">SECOND CARD HIDDEN</p></div>
             {% endif %}
         </p>
         <p></p>
-        <p>Dealer Total - HIDDEN</p>
+        <p id="dealerTotal">Dealer Total - HIDDEN</p>
     {% endif %}
     </p>
     </td>
@@ -76,7 +76,7 @@
     <h3>Player's Hand:</h3>
     <p id="playerHand">
         {% for card in card_data.playerCards %}
-    <p>
+    <p id="playerCard">
         {% if card.suit == 'Diamonds' or card.suit == 'Hearts'%}
         <div style="color:red">{{ card }}
         </div>
@@ -133,7 +133,7 @@
                 <option>50
             </select>
         </div>
-        <button type="submit">Place Bet</button>
+        <button id="submitBet" type="submit">Place Bet</button>
     </form>
 
     <p></p>

@@ -11,47 +11,51 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
- 
 
-class BlackjackSelenium 
+
+class BlackjackSelenium
 {
    private WebDriver driver;
    // This is our Blackjack website we created and hosted.
+   //private String url = "http://127.0.0.1:5000"; - USED FOR LOCAL TESTING
    private String url = "http://cjm9vr.pythonanywhere.com/";
-   
+
    @BeforeEach
-   void setUp() throws Exception 
+   void setUp() throws Exception
    {
       // configure path to the driver
       System.setProperty("webdriver.chrome.driver", "/Users/kiyanzewer/Documents/cs3250final/chromedriver/");
-          
-      // create an instance of the web browser and open it    
-      driver = new ChromeDriver();   
-      
-      // open the given url 
-      driver.get(url);               
+      //System.setProperty("webdriver.chrome.driver", "/Users/calvinjmin/Downloads/chromedriver");
+
+
+      // create an instance of the web browser and open it
+      driver = new ChromeDriver();
+
+      // open the given url
+      driver.get(url);
    }
 
    @AfterEach
-   void tearDown() throws Exception 
+   void tearDown() throws Exception
    {
       // close the browser
-      driver.close();           
+      driver.close();
    }
 
-   
+
    /*
     * Kiyan Zewer test 1/20
     * The Title should be '- Blackjack'
+    * PATH - 30, 32
     */
    @Test
-   public void testTitle() {
+   public void validateTitle() {
 	   assertEquals(driver.getTitle(), "- Blackjack");
    }
-   
+
    /*
     * Kiyan Zewer test 2/20
-    * Clicking Place Bet should result in a player total less than 22 
+    * Clicking Place Bet should result in a player total less than 22
     * as 21 is the largest possible starting hand
     */
    @Test
@@ -62,7 +66,7 @@ class BlackjackSelenium
 	   int playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
 	   assertTrue(bound > playerTotal);
    }
-   
+
    /*
     * Kiyan Zewer test 3/20
     * Clicking hit as the first move should always result in a new player total value
@@ -83,7 +87,7 @@ class BlackjackSelenium
 	   int newPlayerTotal = Integer.parseInt(g.getText().substring(g.getText().indexOf("-") + 2));
 	   assertTrue(playerTotal != newPlayerTotal);
    }
-   
+
    /*
     * Kiyan Zewer test 4/20
     * Clicking stand should change the Dealer Hand from hidden to shown
@@ -105,7 +109,7 @@ class BlackjackSelenium
 	   WebElement f = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
 	   assertFalse(f.getText().contains("HIDDEN"));
    }
-   
+
    /*
     * Kiyan Zewer test 5/20
     * Clicking the stand button should keep the same Player Total value
@@ -120,10 +124,10 @@ class BlackjackSelenium
 	   int newPlayerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
 	   assertEquals(playerTotal, newPlayerTotal);
    }
-   
+
    /*
     * Kiyan Zewer test 6/20
-    * If the dealer has blackjack the game should show their cards and show 
+    * If the dealer has blackjack the game should show their cards and show
     * the total as 21 not hidden and that they won as long as the dealer did not also get a Blackjack
     */
    @Test
@@ -137,7 +141,7 @@ class BlackjackSelenium
 	   }
 	   assertTrue(driver.getPageSource().contains("Dealer Blackjack") && dealerTotal.contains("21"));
    }
-   
+
    /*
     * Kiyan Zewer test 7/20
     * If the player has blackjack the game should show their total as 21
@@ -153,7 +157,7 @@ class BlackjackSelenium
 	   }
 	   assertTrue(driver.getPageSource().contains("Player Blackjack") && playerTotal.contains("Player Total - 21"));
    }
-   
+
    /*
     * Kiyan Zewer test 8/20
     * If the player clicks stand then the hit button should have no function
@@ -173,7 +177,7 @@ class BlackjackSelenium
 	   int newPlayerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
 	   assertEquals(playerTotal, newPlayerTotal);
    }
-   
+
    /*
     * Kiyan Zewer test 9/20
     * Clicking hit after you bust will not do anything as the game is over
@@ -200,7 +204,7 @@ class BlackjackSelenium
 	   int newPlayerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
 	   assertEquals(playerTotal, newPlayerTotal);
    }
-   
+
    /*
     * Kiyan Zewer test 10/20
     * if the card is diamond the text is red
@@ -217,7 +221,7 @@ class BlackjackSelenium
 	   String color = e.getCssValue("color");
 	   assertEquals("rgba(255, 0, 0, 1)", color);
    }
-   
+
    /*
     * Kiyan Zewer test 11/20
     * if the card is heart the text is red
@@ -234,7 +238,7 @@ class BlackjackSelenium
 	   String color = e.getCssValue("color");
 	   assertEquals("rgba(255, 0, 0, 1)", color);
    }
-   
+
    /*
     * Kiyan Zewer test 12/20
     * if the card is a club the text is black
@@ -251,7 +255,7 @@ class BlackjackSelenium
 	   String color = e.getCssValue("color");
 	   assertEquals("rgba(0, 0, 0, 1)", color);
    }
-   
+
    /*
     * Kiyan Zewer test 13/20
     * if the card is a spade the text is black
@@ -268,7 +272,7 @@ class BlackjackSelenium
 	   String color = e.getCssValue("color");
 	   assertEquals("rgba(0, 0, 0, 1)", color);
    }
-   
+
    /*
     * Kiyan Zewer test 14/20
     * result should be bust if player busts
@@ -295,7 +299,7 @@ class BlackjackSelenium
 	   }
 	   assertTrue(driver.getPageSource().contains("Bust, you lose"));
    }
-   
+
    /*
     * Kiyan Zewer test 15/20
     * result should be dealer busts if the dealer busts
@@ -325,7 +329,7 @@ class BlackjackSelenium
 	   }
 	   assertTrue(driver.getPageSource().contains("Dealer Busts, you win"));
    }
-   
+
    /*
     * Kiyan Zewer test 16/20
     * result should be push if it is a tie
@@ -348,8 +352,8 @@ class BlackjackSelenium
 	   }
 	   assertTrue(driver.getPageSource().contains("Push"));
    }
-   
-   
+
+
    /*
     * Kiyan Zewer test 17/20
     * result should be player wins if stand and has value larger than dealer without busting
@@ -373,10 +377,10 @@ class BlackjackSelenium
 	   }
 	   assertTrue(driver.getPageSource().contains("You Win"));
    }
-   
+
    /*
     * Kiyan Zewer test 18/20
-    * result should be player loses if they stand and they have a value smaller 
+    * result should be player loses if they stand and they have a value smaller
     * than the dealer without busting
     */
    @Test
@@ -398,7 +402,7 @@ class BlackjackSelenium
 	   }
 	   assertTrue(driver.getPageSource().contains("You Lose"));
    }
-   
+
    /*
     * Kiyan Zewer test 19/20
     * Player hits without busting and wins
@@ -425,7 +429,7 @@ class BlackjackSelenium
 	   }
 	   assertTrue(driver.getPageSource().contains("You Win"));
    }
-   
+
    /*
     * Kiyan Zewer test 20/20
     * dealer total should be hidden unless player stands or game is over
@@ -446,4 +450,356 @@ class BlackjackSelenium
 	   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
 	   assertTrue(e.getText().contains("HIDDEN"));
    }
-}   
+
+   /*
+    * Calvin Min Test 1/20
+    * Adjust credit count by 10 credits - ASSUMING NEW GAME
+    * PATH - 1, 2, 4, 8
+    */
+   @Test
+   public void testAddingCredits() {
+	   Actions action = new Actions(driver);
+	   while ( !driver.findElement(By.id("userCredits")).getText().equals("0 Credits") ) {
+	       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("subCredits"))).click().build().perform();
+	   }
+       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("resetCredits"))).click().build().perform();
+	   boolean initCredits = driver.findElement(By.id("userCredits")).getText().contains("100");
+       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("addCredits"))).click().build().perform();
+       boolean addCredits = driver.findElement(By.id("userCredits")).getText().contains("110");
+	   assertTrue( initCredits && addCredits );
+   }
+
+   /*
+    * Calvin Min Test 2/20
+    *  Reduce credit count by 10 credits - ASSUMING NEW GAME
+    *  PATH - 1,2,5
+    */
+   @Test
+   public void testSubtractingCredits() {
+	   Actions action = new Actions(driver);
+	   while ( !driver.findElement(By.id("userCredits")).getText().equals("0 Credits") ) {
+	       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("subCredits"))).click().build().perform();
+	   }
+       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("resetCredits"))).click().build().perform();
+	   boolean initCredits = driver.findElement(By.id("userCredits")).getText().contains("100");
+       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("subCredits"))).click().build().perform();
+       boolean subCredits = driver.findElement(By.id("userCredits")).getText().contains("90");
+	   assertTrue( initCredits && subCredits );
+   }
+
+   /*
+    * Calvin Min Test 3/20
+    * Reset Credit Back to 100
+    * PATH - 1, 2, 4, 9
+    */
+   @Test
+   public void testResetCredits() {
+	   Actions action = new Actions(driver);
+	   while ( !driver.findElement(By.id("userCredits")).getText().equals("0 Credits") ) {
+	       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("subCredits"))).click().build().perform();
+	   }
+       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("resetCredits"))).click().build().perform();
+	   assertTrue(driver.findElement(By.id("userCredits")).getText().contains("100 Credits"));
+   }
+
+
+   /*
+    * Calvin Min Test 4/20
+    * Test Bet Dropdown Selection
+    */
+   @Test
+   public void testBetCredits() {
+	   Select select = new Select(driver.findElement(By.id("betDropdown")));
+	   select.selectByVisibleText("10");
+	   driver.findElement(By.id("submitBet")).click();
+	   assertTrue(driver.findElement(By.id("currentBet")).getText().contains("10") );
+   }
+
+   /*
+    * Calvin Min Test 5/20
+    * Testing Credit Wins
+    * PATH - 1, 3, 6
+    */
+   @Test
+   public void testCreditWin() {
+	   int currCredits = Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+	   Select select = new Select(driver.findElement(By.id("betDropdown")));
+	   select.selectByVisibleText("1");
+	   driver.findElement(By.id("submitBet")).click();
+
+	   driver.findElement(By.xpath("//button[text()='Stand']")).click();
+	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+	   WebElement f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+	   String dealer = e.getText().substring(e.getText().indexOf("-") + 2);
+	   int playerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
+	   int dealerTotal = Integer.parseInt(dealer);
+
+
+	   while(dealerTotal >= 21 || playerTotal >= 21 || dealerTotal >= playerTotal && dealerTotal <= 21) {
+		   currCredits = Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+
+		   Select selectLoop = new Select(driver.findElement(By.id("betDropdown")));
+		   selectLoop.selectByVisibleText("1");
+		   driver.findElement(By.id("submitBet")).click();
+
+		   driver.findElement(By.xpath("//button[text()='Stand']")).click();
+		   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+		   f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+		   dealerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
+		   playerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
+	   }
+
+	   int endCredits = Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+	   assertTrue(currCredits + 1 == endCredits );
+   }
+
+
+   /*
+    * Calvin Min Test 6/20
+    * Testing Credit Loss
+    * PATH - 1, 3, 7, 10
+    */
+   @Test
+   public void testCreditLoss() {
+	   int currCredits = Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+	   Select select = new Select(driver.findElement(By.id("betDropdown")));
+	   select.selectByVisibleText("1");
+	   driver.findElement(By.id("submitBet")).click();
+
+	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+	   WebElement f = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+	   int playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
+
+	   while(f.getText().equals("Dealer Total - 21") || playerTotal == 21) {
+		   currCredits = Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+		   Select selectLoop1 = new Select(driver.findElement(By.id("betDropdown")));
+		   selectLoop1.selectByVisibleText("1");
+		   driver.findElement(By.id("submitBet")).click();
+
+
+		   e = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+		   f = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
+		   playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
+	   }
+	   while(playerTotal < 21){
+		   driver.findElement(By.xpath("//button[text()='Hit']")).click();
+		   e = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
+		   playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
+	   }
+
+	   driver.findElement(By.xpath("//button[text()='Hit']")).click();
+	   int endCredits = Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+	   assertTrue( currCredits == endCredits + 1 );
+   }
+
+   /*
+    * Calvin Min Test 8/20
+    * Testing that betting 0 Credits Work
+    * PATH - 17, 19, 21, 17, 18, 20, 21, 28, 29
+    */
+   @Test
+   public void testBetZeroCredits() {
+	   int currCredits = Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+	   Select select = new Select(driver.findElement(By.id("betDropdown")));
+	   select.selectByVisibleText("0");
+	   driver.findElement(By.id("submitBet")).click();
+	   int endCredits =  Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+	   assertTrue( currCredits == endCredits );
+   }
+
+
+   /*
+    * Calvin Min Test 9/20
+    * Testing that betting 1 Credit Work
+    *  PATH - 17, 19, 21, 17, 18, 20, 22, 28, 29
+    */
+   @Test
+   public void testBetOneCredits() {
+	   Actions action = new Actions(driver);
+	   while ( !driver.findElement(By.id("userCredits")).getText().equals("0 Credits") ) {
+	       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("subCredits"))).click().build().perform();
+	   }
+       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("resetCredits"))).click().build().perform();
+
+	   int currCredits = Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+	   Select select = new Select(driver.findElement(By.id("betDropdown")));
+	   select.selectByVisibleText("1");
+	   driver.findElement(By.id("submitBet")).click();
+	   int endCredits =  Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+	   assertTrue( currCredits == 1 + endCredits );
+   }
+
+
+   /*
+    * Calvin Min Test 10/20
+    * Testing that betting 2 Credit Work
+    * PATH - 17, 19, 21, 17, 18, 20, 23, 28, 29
+    */
+   @Test
+   public void testBetTwoCredits() {
+	   Actions action = new Actions(driver);
+	   while ( !driver.findElement(By.id("userCredits")).getText().equals("0 Credits") ) {
+	       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("subCredits"))).click().build().perform();
+	   }
+       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("resetCredits"))).click().build().perform();
+
+	   int currCredits = Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+	   Select select = new Select(driver.findElement(By.id("betDropdown")));
+	   select.selectByVisibleText("2");
+	   driver.findElement(By.id("submitBet")).click();
+	   int endCredits =  Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+	   assertTrue( currCredits == 2 + endCredits );
+   }
+
+
+   /*
+    * Calvin Min Test 11/20
+    * Testing that betting 5 Credit Work
+    * PATH - 17, 19, 21, 17, 18, 20, 24, 28, 29
+    */
+   @Test
+   public void testBetFiveCredits() {
+	   Actions action = new Actions(driver);
+	   while ( !driver.findElement(By.id("userCredits")).getText().equals("0 Credits") ) {
+	       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("subCredits"))).click().build().perform();
+	   }
+       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("resetCredits"))).click().build().perform();
+
+	   int currCredits = Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+	   Select select = new Select(driver.findElement(By.id("betDropdown")));
+	   select.selectByVisibleText("5");
+	   driver.findElement(By.id("submitBet")).click();
+	   int endCredits =  Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+	   assertTrue( currCredits == 5 + endCredits );
+   }
+
+
+   /*
+    * Calvin Min Test 12/20
+    * Testing that betting 10 Credit Work
+    * PATH - 17, 19, 21, 17, 18, 20, 25, 28, 29
+    */
+   @Test
+   public void testBetTenCredits() {
+	   Actions action = new Actions(driver);
+	   while ( !driver.findElement(By.id("userCredits")).getText().equals("0 Credits") ) {
+	       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("subCredits"))).click().build().perform();
+	   }
+       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("resetCredits"))).click().build().perform();
+
+	   int currCredits = Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+	   Select select = new Select(driver.findElement(By.id("betDropdown")));
+	   select.selectByVisibleText("10");
+	   driver.findElement(By.id("submitBet")).click();
+	   int endCredits =  Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+	   assertTrue( currCredits == 10 + endCredits );
+   }
+
+   /*
+    * Calvin Min Test 13/20
+    * Testing that betting 25 Credits Work
+    * PATH - 17, 19, 21, 17, 18, 20, 26, 28, 29
+    */
+   @Test
+   public void testBetTwentyFiveCredits() {
+	   Actions action = new Actions(driver);
+	   while ( !driver.findElement(By.id("userCredits")).getText().equals("0 Credits") ) {
+	       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("subCredits"))).click().build().perform();
+	   }
+       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("resetCredits"))).click().build().perform();
+
+	   int currCredits = Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+	   Select select = new Select(driver.findElement(By.id("betDropdown")));
+	   select.selectByVisibleText("25");
+	   driver.findElement(By.id("submitBet")).click();
+	   int endCredits =  Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+	   assertTrue( currCredits == 25 + endCredits );
+   }
+
+
+   /*
+    * Calvin Min Test 14/20
+    * Testing that betting 50 Credits Work
+    * PATH - 17, 19, 21, 17, 18, 20, 27, 28, 29
+    */
+   @Test
+   public void testBetFiftyCredits() {
+	   Actions action = new Actions(driver);
+	   while ( !driver.findElement(By.id("userCredits")).getText().equals("0 Credits") ) {
+	       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("subCredits"))).click().build().perform();
+	   }
+       action.moveToElement(driver.findElement(By.id("userCredits"))).moveToElement(driver.findElement(By.id("resetCredits"))).click().build().perform();
+
+	   int currCredits = Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+	   Select select = new Select(driver.findElement(By.id("betDropdown")));
+	   select.selectByVisibleText("50");
+	   driver.findElement(By.id("submitBet")).click();
+	   int endCredits =  Integer.parseInt(driver.findElement(By.id("userCredits")).getText().replaceAll("[^0-9]", ""));
+	   assertTrue( currCredits == 50 + endCredits );
+   }
+
+
+   /*
+    * Calvin Min Test 15/20
+    * Dealer's Second Card is hidden when hands are dealt
+    * PATH - 13, 15
+    */
+   @Test
+   public void testInitDealerCardHidden() {
+	   Select select = new Select(driver.findElement(By.id("betDropdown")));
+	   select.selectByVisibleText("0");
+	   driver.findElement(By.id("submitBet")).click();
+	   assertTrue(driver.findElement(By.id("dealerSecondCard")).getText().equals("SECOND CARD HIDDEN"));
+   }
+
+
+   /*
+    * Calvin Min Test 16/20
+    * Dealer's Total is hidden when hands are dealt
+    * PATH - 13,14
+    */
+   @Test
+   public void testInitDealerTotalHidden() {
+	   Select select = new Select(driver.findElement(By.id("betDropdown")));
+	   select.selectByVisibleText("0");
+	   driver.findElement(By.id("submitBet")).click();
+	   assertTrue(driver.findElement(By.id("dealerTotal")).getText().equals("Dealer Total - HIDDEN"));
+   }
+
+   /*
+    * Calvin Min Test 17/20
+    * Player's Hand is shown when hands are dealt
+    * PATH - 13, 16
+    */
+   @Test
+   public void testInitPlayerTotal() {
+	   Select select = new Select(driver.findElement(By.id("betDropdown")));
+	   select.selectByVisibleText("0");
+	   driver.findElement(By.id("submitBet")).click();
+	   assertTrue(!driver.findElement(By.id("playerTotal")).getText().equals("Dealer Total - HIDDEN"));
+   }
+
+
+   /*
+    * Calvin Min Test 18/20
+    * Validating that the website is made by Kiyan Zewer & Calvin Min
+    * PATH - 30, 31
+    */
+   @Test
+   public void validateAuthors() {
+	   WebElement authors = driver.findElement(By.id("authors"));
+	   assertTrue( authors.getText().contains("Calvin Min (cjm9vr) & Kiyan Zewer (kkz6dh)"));
+   }
+
+   /*
+    * Calvin Min Test 19/20
+    * Validating Project
+    * PATH - 30, 33
+    */
+   @Test
+   public void validateProject() {
+	   WebElement authors = driver.findElement(By.id("authors"));
+	   assertTrue( authors.getText().contains("Software Testing Project") && !authors.getText().contains("Computer Architecture") );
+   }
+   
+}
