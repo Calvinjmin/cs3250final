@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="BlackjackSelenium.dealerBlackJack" project="BlackJackTest" tests="1" started="1" failures="1" errors="0" ignored="0">
-  <testsuite name="test.BlackjackSelenium" time="20.543" displayname="BlackjackSelenium" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]">
-    <testcase name="dealerBlackJack" classname="test.BlackjackSelenium" time="20.543" displayname="dealerBlackJack()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:dealerBlackJack()]">
+<?xml version="1.0" encoding="UTF-8"?><testrun name="BlackjackSelenium.bothGetBJPush" project="BlackJackTest" tests="1" started="1" failures="1" errors="0" ignored="0">
+  <testsuite name="test.BlackjackSelenium" time="11.272" displayname="BlackjackSelenium" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]">
+    <testcase name="bothGetBJPush" classname="test.BlackjackSelenium" time="11.272" displayname="bothGetBJPush()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:bothGetBJPush()]">
       <failure>
         <expected>true</expected>
         <actual>false</actual>
@@ -9,7 +9,7 @@
 	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:40)
 	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:35)
 	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:162)
-	at test.BlackjackSelenium.dealerBlackJack(BlackjackSelenium.java:146)
+	at test.BlackjackSelenium.bothGetBJPush(BlackjackSelenium.java:363)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

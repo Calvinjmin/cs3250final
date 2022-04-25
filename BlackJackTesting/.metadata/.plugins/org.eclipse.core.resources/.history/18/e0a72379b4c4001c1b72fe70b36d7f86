@@ -41,7 +41,7 @@ class BlackjackSelenium
    void tearDown() throws Exception
    {
       // close the browser
-      //driver.close();
+      driver.close();
    }
 
 
@@ -331,7 +331,7 @@ class BlackjackSelenium
 		   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
 		   dealer = e.getText();
 		   f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
-		   playerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
+		   playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
 	   }
 	   driver.findElement(By.xpath("//button[text()='Stand']")).click();
 	   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
@@ -343,24 +343,6 @@ class BlackjackSelenium
 		   dealerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
 	   }
 	   assertTrue(driver.getPageSource().contains("Dealer Busts, you win"));
-   }
-   
-   @Test
-   public void bothGetBJPush() {
-	   driver.findElement(By.xpath("//button[text()='Place Bet']")).click();
-	   WebElement e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
-	   WebElement f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
-	   int playerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
-	   String dealer = e.getText();
-	   while(playerTotal != 21 || !dealer.contains("21")){
-		   driver.findElement(By.xpath("//button[text()='Stand']")).click();
-		   driver.findElement(By.xpath("//button[text()='Place Bet']")).click();
-		   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
-		   dealer = e.getText();
-		   f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
-		   playerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
-	   }
-	   assertTrue(driver.getPageSource().contains("Push"));
    }
 
    /*

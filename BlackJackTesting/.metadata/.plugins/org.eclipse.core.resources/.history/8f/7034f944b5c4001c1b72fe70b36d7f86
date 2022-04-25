@@ -353,12 +353,12 @@ class BlackjackSelenium
 	   int playerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
 	   String dealer = e.getText();
 	   while(playerTotal != 21 || !dealer.contains("21")){
-		   driver.findElement(By.xpath("//button[text()='Stand']")).click();
 		   driver.findElement(By.xpath("//button[text()='Place Bet']")).click();
 		   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
 		   dealer = e.getText();
 		   f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
 		   playerTotal = Integer.parseInt(f.getText().substring(f.getText().indexOf("-") + 2));
+		   driver.findElement(By.xpath("//button[text()='Stand']")).click();
 	   }
 	   assertTrue(driver.getPageSource().contains("Push"));
    }

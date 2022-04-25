@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="BlackjackSelenium.testResetPlayerTotal" project="BlackJackTest" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="test.BlackjackSelenium" time="22.776" displayname="BlackjackSelenium" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]">
-    <testcase name="testResetPlayerTotal" classname="test.BlackjackSelenium" time="22.776" displayname="testResetPlayerTotal()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:testResetPlayerTotal()]"/>
-  </testsuite>
-</testrun>
