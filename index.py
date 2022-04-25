@@ -42,13 +42,13 @@ def index_page():
     return render_template('index.html', jsonCredits = jsonCredits , card_data=card_data, hand_totals=hand_totals, show=show)
 
 
-@idx.route('/subCredits')
+@idx.route('/resetCredits')
 def resetCredits():
-    if bet['betPlaced'] == False and jsonCredits['credits'] <= 0:
+    if bet['betPlaced'] == False:
         jsonCredits['credits'] = 100
     return flask.redirect(flask.url_for('index.index_page'))
 
-@idx.route('/resetCredits')
+@idx.route('/subCredits')
 def subCredits():
     if bet['betPlaced'] == False and (jsonCredits['credits'] - 10) >= 0:
         jsonCredits['credits'] = int(jsonCredits['credits']) - 10
