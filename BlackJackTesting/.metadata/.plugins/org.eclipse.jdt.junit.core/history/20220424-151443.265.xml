@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="BlackjackSelenium.checkPlayerResultIsBust" project="BlackJackTest" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="test.BlackjackSelenium" time="10.888" displayname="BlackjackSelenium" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]">
-    <testcase name="checkPlayerResultIsBust" classname="test.BlackjackSelenium" time="10.888" displayname="checkPlayerResultIsBust()" uniqueid="[engine:junit-jupiter]/[class:test.BlackjackSelenium]/[method:checkPlayerResultIsBust()]"/>
-  </testsuite>
-</testrun>

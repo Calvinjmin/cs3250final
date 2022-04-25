@@ -289,7 +289,7 @@ class BlackjackSelenium
    /*
     * Kiyan Zewer test 14/20
     * result should be bust if player busts
-    * Path - [34, 35, 37, 40, 42, 41]
+    * Path - [
     */
    @Test
    public void checkPlayerResultIsBust() {
@@ -317,7 +317,6 @@ class BlackjackSelenium
    /*
     * Kiyan Zewer test 15/20
     * result should be dealer busts if the dealer busts
-    * Path - [34, 35, 37, 40, 43, 44, 46, 39]
     */
    @Test
    public void checkDealerResultIsBust() {
@@ -348,7 +347,6 @@ class BlackjackSelenium
    /*
     * Kiyan Zewer test 16/20
     * result should be push if it is a tie
-    * Path - [34, 35, 37, 40, 43, 44, 47, 38]
     */
    @Test
    public void testPush() {
@@ -373,7 +371,6 @@ class BlackjackSelenium
    /*
     * Kiyan Zewer test 17/20
     * result should be player wins if stand and has value larger than dealer without busting
-    * Path - [34, 35, 37, 40, 43, 44, 46, 38]
     */
    @Test
    public void testWinWithoutDealerBust() {
@@ -399,7 +396,6 @@ class BlackjackSelenium
     * Kiyan Zewer test 18/20
     * result should be player loses if they stand and they have a value smaller
     * than the dealer without busting
-    * Path - [34, 35, 37, 40, 43, 44, 46, 41]
     */
    @Test
    public void testLoseWithoutDealerBust() {
@@ -424,7 +420,6 @@ class BlackjackSelenium
    /*
     * Kiyan Zewer test 19/20
     * Player hits without busting and wins
-    * Path - [34, 35, 37, 40, 42, 40, 43, 44, 47, 39]
     */
    @Test
    public void testHitNoBustWin() {
@@ -451,11 +446,10 @@ class BlackjackSelenium
 
    /*
     * Kiyan Zewer test 20/20
-    * dealer total should be hidden even if player clicks Hit and does not bust
-    * Path - [34, 35, 37, 40, 42, 40]
+    * dealer total should be hidden unless player stands or game is over
     */
    @Test
-   public void testDealerHiddenAfterHitNoBust() {
+   public void testDealerHiddenUntilStand() {
 	   driver.findElement(By.xpath("//button[text()='Place Bet']")).click();
 	   driver.findElement(By.xpath("//button[text()='Hit']")).click();
 	   WebElement f = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
@@ -470,12 +464,11 @@ class BlackjackSelenium
 	   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
 	   assertTrue(e.getText().contains("HIDDEN"));
    }
-   
 
    /*
     * Calvin Min Test 1/20
     * Adjust credit count by 10 credits - ASSUMING NEW GAME
-    * PATH - [1, 2, 4, 8]
+    * PATH - 1, 2, 4, 8
     */
    @Test
    public void testAddingCredits() {
@@ -493,7 +486,7 @@ class BlackjackSelenium
    /*
     * Calvin Min Test 2/20
     *  Reduce credit count by 10 credits - ASSUMING NEW GAME
-    *  PATH - [1,2,5]
+    *  PATH - 1,2,5
     */
    @Test
    public void testSubtractingCredits() {
@@ -511,7 +504,7 @@ class BlackjackSelenium
    /*
     * Calvin Min Test 3/20
     * Reset Credit Back to 100
-    * PATH - [1, 2, 4, 9]
+    * PATH - 1, 2, 4, 9
     */
    @Test
    public void testResetCredits() {
@@ -539,7 +532,7 @@ class BlackjackSelenium
    /*
     * Calvin Min Test 5/20
     * Testing Credit Wins
-    * PATH - [1, 3, 6]
+    * PATH - 1, 3, 6
     */
    @Test
    public void testCreditWin() {
@@ -578,7 +571,7 @@ class BlackjackSelenium
    /*
     * Calvin Min Test 6/20
     * Testing Credit Loss
-    * PATH - [1, 3, 7, 10]
+    * PATH - 1, 3, 7, 10
     */
    @Test
    public void testCreditLoss() {
@@ -616,7 +609,7 @@ class BlackjackSelenium
    /*
     * Calvin Min Test 8/20
     * Testing that betting 0 Credits Work
-    * PATH - [17, 19, 21, 17, 18, 20, 21, 28, 29]
+    * PATH - 17, 19, 21, 17, 18, 20, 21, 28, 29
     */
    @Test
    public void testBetZeroCredits() {
@@ -632,7 +625,7 @@ class BlackjackSelenium
    /*
     * Calvin Min Test 9/20
     * Testing that betting 1 Credit Work
-    *  PATH - [17, 19, 21, 17, 18, 20, 22, 28, 29]
+    *  PATH - 17, 19, 21, 17, 18, 20, 22, 28, 29
     */
    @Test
    public void testBetOneCredits() {
@@ -654,7 +647,7 @@ class BlackjackSelenium
    /*
     * Calvin Min Test 10/20
     * Testing that betting 2 Credit Work
-    * PATH - [17, 19, 21, 17, 18, 20, 23, 28, 29]
+    * PATH - 17, 19, 21, 17, 18, 20, 23, 28, 29
     */
    @Test
    public void testBetTwoCredits() {
@@ -676,7 +669,7 @@ class BlackjackSelenium
    /*
     * Calvin Min Test 11/20
     * Testing that betting 5 Credit Work
-    * PATH - [17, 19, 21, 17, 18, 20, 24, 28, 29]
+    * PATH - 17, 19, 21, 17, 18, 20, 24, 28, 29
     */
    @Test
    public void testBetFiveCredits() {
@@ -698,7 +691,7 @@ class BlackjackSelenium
    /*
     * Calvin Min Test 12/20
     * Testing that betting 10 Credit Work
-    * PATH - [17, 19, 21, 17, 18, 20, 25, 28, 29]
+    * PATH - 17, 19, 21, 17, 18, 20, 25, 28, 29
     */
    @Test
    public void testBetTenCredits() {
@@ -719,7 +712,7 @@ class BlackjackSelenium
    /*
     * Calvin Min Test 13/20
     * Testing that betting 25 Credits Work
-    * PATH - [17, 19, 21, 17, 18, 20, 26, 28, 29]
+    * PATH - 17, 19, 21, 17, 18, 20, 26, 28, 29
     */
    @Test
    public void testBetTwentyFiveCredits() {
@@ -741,7 +734,7 @@ class BlackjackSelenium
    /*
     * Calvin Min Test 14/20
     * Testing that betting 50 Credits Work
-    * PATH - [17, 19, 21, 17, 18, 20, 27, 28, 29]
+    * PATH - 17, 19, 21, 17, 18, 20, 27, 28, 29
     */
    @Test
    public void testBetFiftyCredits() {
@@ -763,7 +756,7 @@ class BlackjackSelenium
    /*
     * Calvin Min Test 15/20
     * Dealer's Second Card is hidden when hands are dealt
-    * PATH - [13, 15]
+    * PATH - 13, 15
     */
    @Test
    public void testInitDealerCardHidden() {
@@ -777,7 +770,7 @@ class BlackjackSelenium
    /*
     * Calvin Min Test 16/20
     * Dealer's Total is hidden when hands are dealt
-    * PATH - [13,14]
+    * PATH - 13,14
     */
    @Test
    public void testInitDealerTotalHidden() {
@@ -790,7 +783,7 @@ class BlackjackSelenium
    /*
     * Calvin Min Test 17/20
     * Player's Hand is shown when hands are dealt
-    * PATH - [13, 16]
+    * PATH - 13, 16
     */
    @Test
    public void testInitPlayerTotal() {
@@ -804,7 +797,7 @@ class BlackjackSelenium
    /*
     * Calvin Min Test 18/20
     * Validating that the website is made by Kiyan Zewer & Calvin Min
-    * PATH - [30, 31]
+    * PATH - 30, 31
     */
    @Test
    public void validateAuthors() {
@@ -815,7 +808,7 @@ class BlackjackSelenium
    /*
     * Calvin Min Test 19/20
     * Validating Project
-    * PATH - [30, 33]
+    * PATH - 30, 33
     */
    @Test
    public void validateProject() {
