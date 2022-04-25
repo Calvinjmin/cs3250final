@@ -51,7 +51,7 @@
             {% endif %}
     </p>
     {% endfor %}
-    <p>Dealer Total - {{hand_totals.dTotal}}</p>
+    <p id="dealerTotal">Dealer Total - {{hand_totals.dTotal}}</p>
     <p></p>{% else %}
         <p></p>
         {% if card_data.dealerCards[0].suit == 'Diamonds' or card_data.dealerCards[0].suit == 'Hearts'%}

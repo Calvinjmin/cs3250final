@@ -131,9 +131,9 @@ class BlackjackSelenium
    /*
     * Kiyan Zewer test 6/20
     * If the dealer has blackjack the game should show their cards and show
-    * the total as 21 not hidden and that the player lost as long as the player 
+    * the total as 21 not hidden and that the player lost as long as the player
     * did not also get a Blackjack
-    * Path - [34, 35, 37, 41]	
+    * Path - [34, 35, 37, 41]
     */
    @Test
    public void dealerBlackJack(){
@@ -488,7 +488,7 @@ class BlackjackSelenium
 	   e = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
 	   assertTrue(e.getText().contains("HIDDEN"));
    }
-   
+
 
    /*
     * Calvin Min Test 1/20
@@ -634,7 +634,7 @@ class BlackjackSelenium
    /*
     * Calvin Min Test 8/20
     * Testing that betting 0 Credits Work
-    * PATH - [17, 19, 21, 17, 18, 20, 21, 28, 29]
+    * PATH - [17, 19, 21, 17, 18, 20, 54, 28, 29]
     */
    @Test
    public void testBetZeroCredits() {
