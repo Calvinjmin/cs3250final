@@ -41,7 +41,7 @@ class BlackjackSelenium
    void tearDown() throws Exception
    {
       // close the browser
-      driver.close();
+      //driver.close();
    }
 
 
@@ -203,8 +203,7 @@ class BlackjackSelenium
 		   f = driver.findElement(By.xpath("//*[contains(text(), 'Dealer Total')]"));
 		   playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
 	   }
-	   while(playerTotal <= 21){
-		   driver.findElement(By.xpath("//button[text()='Place Bet']")).click();
+	   while(playerTotal < 21){
 		   driver.findElement(By.xpath("//button[text()='Hit']")).click();
 		   e = driver.findElement(By.xpath("//*[contains(text(), 'Player Total')]"));
 		   playerTotal = Integer.parseInt(e.getText().substring(e.getText().indexOf("-") + 2));
